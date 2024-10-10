@@ -60,7 +60,7 @@ img {
 .home-head {
   font-family: 'Francois One', sans-serif; /* Apply Francois One font */
   font-weight: 300;
-  font-size: 6.5rem; /* Adjust font size as needed */
+  font-size: 5.5rem; /* Adjust font size as needed */
   text-shadow: .4rem .4rem .4rem rgba(0, 0, 0, 1); /* Shadow effect */
   color: white; /* Change to your preferred color */
 }
@@ -81,6 +81,36 @@ img {
   font-size: 1rem; 
   margin-top: 0.5rem; 
 }
+
+.image-container {
+  display: flex;
+  width:40vw;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-content {
+  margin-top: 5rem;
+  width: 40vw; /* Set a width for the image container */
+   /* 3:5 aspect ratio */
+   object-fit: cover;
+   height: 40%;
+   width: 100%;
+  
+}
+
+.houses-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Adjust this based on how wide you want the row to be */
+ 
+}
+
+.houses-row img {
+  width: 30%; /* Each image takes up 30% of the row, adjust as needed */
+  margin: 0 10px; /* Add spacing between the images */
+}
+
 
 @media (max-width: 767.98px) {
   img {

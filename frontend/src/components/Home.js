@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import "../styles/Home.css";
+import house1 from "../Assets/house1.jpg";
+import house2 from "../Assets/house2.jpg";
+import house3 from "../Assets/house3.jpg";
+import house4 from "../Assets/house4.jpg";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -77,14 +81,33 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {/* Uncomment if you want to include an image */}
-          {/* <div className="image-content">
-            <img
-              src={Creative}
-              alt="Trading Illustration"
-              className="img-fluid"
-            />
-          </div> */}
+          <div className="image-container">
+            <div className="image-content">
+              <img
+                src={house1}
+                alt="House Illustration 1"
+                className="img-fluid"
+                // Correcting the style attribute for JSX
+              />
+            </div>
+            <div className="houses-row">
+              <img
+                src={house2}
+                alt="House Illustration 2"
+                className="img-fluid"
+              />
+              <img
+                src={house3}
+                alt="House Illustration 3"
+                className="img-fluid"
+              />
+              <img
+                src={house4}
+                alt="House Illustration 4"
+                className="img-fluid"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
