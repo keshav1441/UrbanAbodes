@@ -52,7 +52,9 @@ export default function Home() {
         <div className="content-wrapper d-flex align-items-center justify-content-between">
           <div className="text-content">
             <h1 className="display-4 home-head">Beyond Just Four Walls</h1>
-            <p className="lead home-subhead">Creating Spaces That Feel Like Home</p>
+            <p className="lead home-subhead">
+              Creating Spaces That Feel Like Home
+            </p>
             <div className="container demo">
               <div className="demo-form d-flex flex-column align-items-start">
                 <input
@@ -87,24 +89,23 @@ export default function Home() {
                 src={house1}
                 alt="House Illustration 1"
                 className="img-fluid"
-                // Correcting the style attribute for JSX
               />
             </div>
             <div className="houses-row">
               <img
                 src={house2}
                 alt="House Illustration 2"
-                className="img-fluid"
+                className="img-fluid house"
               />
               <img
                 src={house3}
                 alt="House Illustration 3"
-                className="img-fluid"
+                className="img-fluid house"
               />
               <img
                 src={house4}
                 alt="House Illustration 4"
-                className="img-fluid"
+                className="img-fluid house"
               />
             </div>
           </div>

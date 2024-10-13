@@ -51,10 +51,15 @@ button.request {
      font-weight: 600;
 }
 
-img {
-  padding: 1rem;
+.image-content{
   width: 60vw;
   object-fit: contain;
+  margin: 1rem;
+}
+.house{
+  width: 60vw;
+  object-fit: cover;
+  margin: 2rem;
 }
 
 .home-head {
