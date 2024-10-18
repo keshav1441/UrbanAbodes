@@ -5,9 +5,11 @@
 
 
 .navbar {
-    margin-top: .5rem; 
+    margin-bottom: .5rem; 
   }
-  
+.navbar-auth{
+  background-color: #146C94;
+}
   .nav-item {
     margin-right: 1rem;
   }
