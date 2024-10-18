@@ -1,13 +1,19 @@
+# cspell:disable
+
 from fastapi import FastAPI
+import os
 from fastapi.middleware.cors import CORSMiddleware
-from config.configs import settings
 from routers.routes import api_routers
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
 
 app.include_router(api_routers, prefix="/api")
 
-origins = settings.CLIENT_URL
+origins = os.getenv("CLIENT_URL")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -16,6 +22,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
