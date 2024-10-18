@@ -17,6 +17,8 @@ const Nav = () => {
         return "navbar navbar-expand-lg navbar-light navbar-auth fixed-top";
       case "/login":
         return "navbar navbar-expand-lg navbar-light navbar-auth fixed-top";
+      case "/form2":
+        return "navbar navbar-expand-lg navbar-light navbar-auth fixed-top";
       default:
         return "navbar navbar-expand-lg navbar-light bg-default fixed-top";
     }

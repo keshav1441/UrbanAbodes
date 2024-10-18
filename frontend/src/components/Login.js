@@ -113,6 +113,7 @@ const Login = () => {
             type="submit"
             variant="contained"
             fullWidth
+            to="/dashboard"
             style={{
               backgroundColor: "#146C94",
               color: "#ffffff",
@@ -120,7 +121,7 @@ const Login = () => {
               marginTop: "15px",
             }}
           >
-            Sign in
+            Sign in &rarr;
           </Button>
 
           <div className="signup-footer">

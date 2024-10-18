@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Nav from "./components/Nav";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Form2 from "./components/Form2";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/form2" element={<Form2 />} />
       </Routes>
     </Router>
   );

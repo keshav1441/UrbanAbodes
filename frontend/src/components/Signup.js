@@ -1,6 +1,6 @@
 // cspell:disable
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, TextField, IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import GoogleIcon from "@mui/icons-material/Google";
@@ -9,11 +9,12 @@ import "../styles/Login.css";
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  const navigate = useNavigate(); // Use navigate hook
 
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
 
@@ -28,6 +29,9 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+
+    // Navigate to the Form2 page upon successful form submission
+    navigate("/form2");
   };
 
   return (
