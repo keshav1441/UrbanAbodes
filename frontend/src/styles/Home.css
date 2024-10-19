@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Francois+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+.dark {
+  background: linear-gradient(to bottom right, #146C94, #06222E);
+  height: 100vh;
+  color: #f8fafd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  font-family: "Playfair Display", serif;
+}
+
+.dark {
+  font-weight: 600;
+  font-style: normal;
+  font-size: 4rem;
+  text-align: left;
+  width: 100%;
+  padding: 2px;
+}
+
+.lead {
+  font-family: "Oswald", sans-serif; 
+  font-style: normal;
+  font-size: 2rem;
+  text-align: left;
+  width: 100%;
+}
+
+.demo-form {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+input.form-control {
+  flex: 1; 
+  margin-right: 10px; 
+  font-family: "Oswald", sans-serif; 
+}
+
+button.request {
+    background-color: #AFD3E2;
+    min-width: 150px; 
+    color: black;
+    font-family: "Inter", sans-serif; 
+     font-weight: 600;
+}
+
+.image-content{
+  width: 60vw;
+  object-fit: contain;
+  margin: 1rem;
+}
+.house{
+  width: 60vw;
+  object-fit: cover;
+  margin: 2rem;
+}
+
+.home-head {
+  font-family: 'Francois One', sans-serif; /* Apply Francois One font */
+  font-weight: 300;
+  font-size: 5.5rem; /* Adjust font size as needed */
+  text-shadow: .4rem .4rem .4rem rgba(0, 0, 0, 1); /* Shadow effect */
+  color: white; /* Change to your preferred color */
+}
+
+.home-subhead {
+  font-family: 'Karla', sans-serif; /* Apply Karla font */
+  font-weight: 300; /* Use light weight */
+  font-size: 2.25rem; /* Adjust font size as needed */
+  color: #ffffff; /* Change to your preferred color */
+}
+
+.request-email{
+  background-color: #87ACB9;
+}
+
+.text-danger,
+.text-success {
+  font-size: 1rem; 
+  margin-top: 0.5rem; 
+}
+
+.image-container {
+  display: flex;
+  width:40vw;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-content {
+  margin-top: 5rem;
+  width: 40vw; /* Set a width for the image container */
+   /* 3:5 aspect ratio */
+   object-fit: cover;
+   height: 40%;
+   width: 100%;
+  
+}
+
+.houses-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Adjust this based on how wide you want the row to be */
+ 
+}
+
+.houses-row img {
+  width: 30%; /* Each image takes up 30% of the row, adjust as needed */
+  margin: 0 10px; /* Add spacing between the images */
+}
+
+
+@media (max-width: 767.98px) {
+  img {
+    width: 100%; 
+  }
+}
