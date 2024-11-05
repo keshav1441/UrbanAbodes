@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from models.requestemail import RequestEmail
-from config.db import request_email_coll
+from configs.db import request_email_coll
 
 
 router = APIRouter()
