@@ -1,2 +1,23 @@
-.venv
+# Ignore virtual environment directories
+.venv/
+venv/
+env/
+ENV/
+
+# Ignore .env files (containing sensitive information like API keys, credentials)
 .env
+
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore IDE/editor-specific settings
+.vscode/
+.idea/
+
+# Ignore Mac system files
+.DS_Store
+
+# Ignore Windows system files
+Thumbs.db

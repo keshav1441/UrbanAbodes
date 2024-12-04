@@ -21,6 +21,13 @@ export default function Home() {
     setError("");
     setSuccess("");
 
+    // Validate email
+    if (!email) {
+      setError("Please enter a valid email address.");
+      setIsLoading(false);
+      return;
+    }
+
     try {
       console.log(`Demo requested for email: ${email}`);
       const response = await fetch("http://localhost:8000/api/request-email", {
@@ -32,11 +39,15 @@ export default function Home() {
       });
 
       const data = await response.json();
-      if (response.ok) {
-        setSuccess(data.message || "Demo request successful!");
-        setEmail("");
+      if (!response.ok) {
+        // Log the error data for debugging
+        console.error("Error Response Data:", data);
+        setError(
+          data.message || `Error ${response.status}: Something went wrong.`
+        );
       } else {
-        setError(data.message || "Something went wrong. Please try again.");
+        setSuccess(data.message || "Demo request successful!");
+        setEmail(""); // Clear the email input
       }
     } catch (error) {
       setError("An unexpected error occurred. Please try again.");
