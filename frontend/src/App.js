@@ -8,6 +8,7 @@ import Nav from "./components/Nav";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Form2 from "./components/Form2";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/form2" element={<Form2 />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

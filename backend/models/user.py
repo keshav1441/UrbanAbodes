@@ -15,3 +15,6 @@ class User(BaseModel):
     dob: Optional[date] = Field(None, description="User's date of birth") 
     state: Optional[str] = Field(None, description="User's state") 
     city: Optional[str] = Field(None, description="User's city")  
+    
+class AuthRequest(BaseModel):
+    tokenId: str = Field(..., description="Google OAuth token ID")

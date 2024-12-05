@@ -38,7 +38,7 @@ export default function SignUp() {
   const authenticateUser = async (tokenId, isGoogleAuth) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/api/auth/google`,
+        `${process.env.REACT_APP_CLIENT_URL}/api/auth/google`,
         {
           method: "POST",
           headers: {
@@ -64,10 +64,8 @@ export default function SignUp() {
             picture: data.picture,
           })
         );
-
-        window.location.href = data.redirect_url;
+        window.location.href = data.redirect_url || "/dashboard";
       } else {
-        console.error("Authentication failed:", data.message);
         setError(data.message || "Authentication failed. Please try again.");
       }
     } catch (error) {
