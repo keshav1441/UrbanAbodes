@@ -13,7 +13,7 @@ app = FastAPI()
 
 app.include_router(api_routers, prefix="/api")
 
-origins = os.getenv("REACT_APP_CLIENT_URL")
+origins = os.getenv("CLIENT_URL")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
