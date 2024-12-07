@@ -20,42 +20,39 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Handle Google Login response
   const handleGoogleResponse = async (response) => {
     if (response?.credential) {
       console.log("Google Auth Token:", response.credential);
       await authenticateUser(response.credential, true);
     } else {
-      console.error("Failed to get Google Auth Token.");
       setError("Failed to get Google Auth Token.");
     }
   };
 
-  const handleGoogleError = (error) => {
-    console.error("Google Auth Error:", error);
+  // Handle Google Login error
+  const handleGoogleError = () => {
     setError("Google authentication failed.");
   };
 
+  // Authenticate user with server
   const authenticateUser = async (tokenId, isGoogleAuth) => {
+    setLoading(true);
     try {
       const response = await fetch(
         `${process.env.REACT_APP_SERVER_URL}/api/auth/google`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ tokenId, isGoogleAuth, email, password }),
         }
       );
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
       const data = await response.json();
-      if (data.success) {
-        window.localStorage.setItem("accessToken", data.access_token);
-        window.localStorage.setItem(
+      if (response.ok && data.success) {
+        // Save token and user info
+        localStorage.setItem("accessToken", data.access_token);
+        localStorage.setItem(
           "userInfo",
           JSON.stringify({
             userId: data.user_id,
@@ -66,14 +63,17 @@ export default function SignUp() {
         );
         window.location.href = data.redirect_url || "/dashboard";
       } else {
-        setError(data.message || "Authentication failed. Please try again.");
+        setError(data.message || "Authentication failed.");
       }
     } catch (error) {
       console.error("Error authenticating user:", error);
       setError("An error occurred while authenticating.");
+    } finally {
+      setLoading(false);
     }
   };
 
+  // Form submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -83,6 +83,7 @@ export default function SignUp() {
     // Further form submission logic here
   };
 
+  // Handle input field changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === "email") setEmail(value);
@@ -90,9 +91,8 @@ export default function SignUp() {
     if (name === "confirmPassword") setConfirmPassword(value);
   };
 
-  const handleClickShowPassword = () => {
-    setShowPassword((prev) => !prev);
-  };
+  // Toggle password visibility
+  const toggleShowPassword = () => setShowPassword((prev) => !prev);
 
   return (
     <div className="login">
@@ -115,7 +115,12 @@ export default function SignUp() {
                 variant="contained"
                 startIcon={<GoogleIcon />}
                 fullWidth
-                sx={{ backgroundColor: "#de5246", color: "#fff", mb: 2 }}
+                sx={{
+                  backgroundColor: "#de5246",
+                  color: "#fff",
+                  mb: 2,
+                  "&:hover": { backgroundColor: "#c43c34" },
+                }}
                 onClick={renderProps.onClick}
                 disabled={loading}
               >
@@ -157,7 +162,7 @@ export default function SignUp() {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton onClick={handleClickShowPassword}>
+                  <IconButton onClick={toggleShowPassword}>
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
@@ -177,7 +182,7 @@ export default function SignUp() {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton onClick={handleClickShowPassword}>
+                  <IconButton onClick={toggleShowPassword}>
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
@@ -194,6 +199,7 @@ export default function SignUp() {
               color: "#ffffff",
               fontWeight: "bold",
               mt: 2,
+              "&:hover": { backgroundColor: "#12587a" },
             }}
           >
             Register
