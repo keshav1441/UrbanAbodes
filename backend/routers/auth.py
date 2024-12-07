@@ -17,7 +17,7 @@ router = APIRouter()
 
 # Constants
 SECRET_KEY = os.getenv("SECRET_KEY", "your_default_secret_key")
-ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))  
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))  # Default to 30 minutes if not set
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
 
 # OAuth2 Password bearer token scheme
@@ -32,6 +32,7 @@ def create_access_token(data: User, expires_delta: Optional[timedelta] = None):
         return encoded_jwt
     except JWTError as e:
         raise HTTPException(status_code=500, detail="Token creation failed")
+
 
 async def authenticate_user(token_id: str):
     try:
