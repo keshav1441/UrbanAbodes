@@ -1,22 +1,19 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, Field
 from typing import Optional
-from datetime import date  
-
+from datetime import datetime  
+from pydantic import field_validator
 class AuthRequest(BaseModel):
     tokenId: str = Field(..., description="Google OAuth token ID")
-
 class TokenPayload(BaseModel):
-    userId: str = Field(..., description="User ID from the token")
-    email: EmailStr = Field(..., description="User's email address")
+    accessToken: str = Field(..., description="User's access token")
     first_name: Optional[str] = Field(None, description="User's first name")
     last_name: Optional[str] = Field(None, description="User's last name")
-    dob: Optional[date] = Field(None, description="User's date of birth") 
+    dob: Optional[datetime] = Field(None, description="User's date of birth") 
     state: Optional[str] = Field(None, description="User's state") 
-    city: Optional[str] = Field(None, description="User's city")  
+    city: Optional[str] = Field(None, description="User's city") 
     
-class Form2(BaseModel):
-    first_name: str = Field(None, description="User's first name")
-    last_name: str = Field(None, description="User's last name")
-    dob: date = Field(None, description="User's date of birth") 
-    state: str = Field(None, description="User's state") 
-    city: str = Field(None, description="User's city")
+    @field_validator("dob", mode="before")
+    def format_dob(cls, v):
+        if v and isinstance(v, datetime):
+            return v.strftime("%Y-%m-%d")
+        return v 

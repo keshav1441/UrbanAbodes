@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from models.user import User, AuthRequest
+from models.user import User
+from schema.user_schema import AuthRequest, TokenPayload
 from configs.db import user_coll
 from jose import JWTError, jwt
 import httpx
@@ -104,3 +105,63 @@ async def authenticate_user(token_id: str):
 @router.post("/auth/google")
 async def authenticate_google_user(auth_request: AuthRequest):
     return await authenticate_user(auth_request.tokenId)
+
+@router.post("/form2")
+async def setCreds(auth_request: TokenPayload):
+    # Get the access token from the request
+    access_token = auth_request.accessToken
+    dob = auth_request.dob
+    if isinstance(dob, datetime):
+        dob = dob.strftime("%Y-%m-%d")
+
+    if not access_token:
+        raise HTTPException(status_code=401, detail="Access token is missing or invalid.")
+
+    try:
+        # Decode the JWT token to verify the user and extract user information
+        payload = jwt.decode(access_token, SECRET_KEY, algorithms=[ALGORITHM])
+        user_id = payload.get("user_id")
+        
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Invalid token: User ID not found.")
+
+        # You could potentially validate the user's token by querying the database
+        user = await user_coll.find_one({"user_id": user_id})
+        if not user:
+            raise HTTPException(status_code=401, detail="User not found.")
+
+        # Process the form data (you could expand this to include more fields)
+        first_name = auth_request.first_name
+        last_name = auth_request.last_name
+        dob = auth_request.dob
+        state = auth_request.state
+        city = auth_request.city
+        
+        # Update the user record with new information
+        await user_coll.update_one(
+            {"user_id": user_id},
+            {
+                "$set": {
+                    "first_name": first_name,
+                    "last_name": last_name,
+                    "dob": dob,
+                    "state": state,
+                    "city": city
+                }
+            }
+        )
+        
+        # Return a success message
+        return JSONResponse(
+            status_code=200,
+            content={
+                "success": True,
+                "message": "User credentials updated successfully.",
+                "redirect_url": f"/dashboard/{user_id}"  # Redirect to dashboard after form submission
+            }
+        )
+        
+    except JWTError as e:
+        raise HTTPException(status_code=401, detail="Invalid or expired token.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Internal server error: " + str(e))
